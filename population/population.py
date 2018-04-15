@@ -22,7 +22,7 @@ class Population:
         self.loci = loci
         self.limit = limit
         self.fitness = fitness_wrapper
-        self.fitnesses = np.zeros(limit)
+        self.fitnesses = None
         self.operators = Operators() if operators is None else operators
 
         self.initializer = DefaultInitializer() if initializer is None else initializer
@@ -69,9 +69,6 @@ class Population:
         :return: history object containing run statistics
         """
 
-        if not self.age:
-            self._initialize(verbosity)
-
         history = (History(["generation", "best_grade", "mean_grade", "grade_std"])
                    if history is None else history)
         self.operators.selection.set_survival_rate(survival_rate)
@@ -91,6 +88,9 @@ class Population:
         return history
 
     def epoch(self, force_update=False, verbosity=1, **fitness_kw):
+        if not self.age:
+            self._initialize(verbosity, **fitness_kw)
+
         self.operators.selection(self.individuals, self.fitnesses, inplace=True)
         self.individuals = self.operators.mutation(self.individuals, inplace=False)
         self.update(force_update, verbose=verbosity, **fitness_kw)
@@ -99,7 +99,8 @@ class Population:
     def _initialize(self, verbosity, **fitness_kw):
         if verbosity:
             print("EVOLUTION: initial update...")
-        self.update(force_update=True, verbosity=verbosity, **fitness_kw)
+        self.fitnesses = np.empty(self.limit)
+        self.update(forced=True, verbose=verbosity, **fitness_kw)
         if verbosity:
             print("EVOLUTION: initial mean grade :", self.fitnesses.mean())
             print("EVOLUTION: initial std of mean:", self.fitnesses.std())

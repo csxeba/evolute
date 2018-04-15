@@ -49,17 +49,17 @@ class SelectionBase:
             raise ValueError("The rate of selection has to be greater than 0 and less or equal to 1")
         self.rate = 1. - selection_rate
 
-    def apply(self, individuals, grades, inplace=False):
+    def apply(self, individuals, fitnesses, inplace=False):
         raise NotImplementedError
 
-    def __call__(self, individuals, grades, inplace=False):
-        return self.apply(individuals, grades, inplace)
+    def __call__(self, individuals, fitnesses, inplace=False):
+        return self.apply(individuals, fitnesses, inplace)
 
 
 class Elitism(SelectionBase):
 
-    def apply(self, individuals, grades, inplace=False):
-        self._selection_step(individuals, grades)
+    def apply(self, individuals, fitnesses, inplace=False):
+        self._selection_step(individuals, fitnesses)
         if not inplace:
             return self._reproduction_copy(individuals)
         self._reproduction_inplace(individuals)
