@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-from evolute import DifferentialEvolution
+from evolute import GeneticPopulation
 from evolute.evaluation import SimpleFitness
 
 
@@ -12,7 +12,7 @@ def fitness(ind, target):
 def main():
     TARGET = np.array([3., 3.])
 
-    pop = DifferentialEvolution(
+    pop = GeneticPopulation(
         loci=2,
         fitness_wrapper=SimpleFitness(fitness, constants={"target": TARGET}),
         limit=100)

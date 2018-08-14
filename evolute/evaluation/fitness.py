@@ -28,14 +28,21 @@ class MultipleFitnesses(FitnessBase):
 
     def __init__(self, functions_by_name, constants_by_function_name=None, order_by_name=None, grader=None):
         super().__init__(no_fitnesses=len(functions_by_name))
+        if len(functions_by_name) < 2:
+            raise ValueError("MultipleFitnesses needs more than one fitness!")
         self.functions = functions_by_name
-        self.kw = {} if constants_by_function_name is None else constants_by_function_name
-        self.order = sorted(self.functions) if order_by_name is None else order_by_name
-        self.grader = SumGrade() if grader is None else grader
+        self.order = order_by_name or list(self.functions)
+        self.constants = constants_by_function_name or {k: {} for k in self.order}
+        self.grader = grader or SumGrade()
+        if len(self.order) != len(self.functions) or any(o not in self.functions for o in self.order):
+            raise ValueError("The specified order is wrong: {}".format(self.order))
+        if len(self.constants) != len(self.functions) or any(k not in self.functions for k in self.constants):
+            raise ValueError("The specified constants are wrong: {}".format(self.constants))
 
     def __call__(self, phenotype, **variables_by_function):
-        fitness = np.array([self.functions[funcname](phenotype, **self.kw[funcname], **variables_by_function[funcname])
-                            for funcname in self.order])
+        fitness = np.array(
+            [self.functions[funcname](phenotype, **self.constants[funcname], **variables_by_function[funcname])
+             for funcname in self.order])
         return self.grader(fitness)
 
 

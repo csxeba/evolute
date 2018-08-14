@@ -1,6 +1,6 @@
 import numpy as np
 from csxdata.utilities.loader import pull_mnist_data
-from evolute import DifferentialEvolution
+from evolute import GeneticPopulation
 from evolute.evaluation import SimpleFitness
 from evolute.initialization import NormalRandom
 from evolute.operators import SmoothMate, ScatterMateWrapper, Operators
@@ -31,7 +31,7 @@ w_folder = WeightFolding(ann)
 fitness = SimpleFitness(fitness_function=fitness_callback,
                         constants={"model": ann, "w_folder": w_folder})
 
-population = DifferentialEvolution(
+population = GeneticPopulation(
     loci=w_flat.size,
     fitness_wrapper=fitness,
     initializer=NormalRandom(mean=w_flat),

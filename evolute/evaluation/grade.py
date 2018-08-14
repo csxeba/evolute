@@ -16,7 +16,7 @@ class NoopGrade(GradeBase):
 class SumGrade(GradeBase):
 
     def __call__(self, fitness):
-        return fitness.sum()
+        return np.sum(fitness)
 
 
 class WeightedSumGrade(GradeBase):

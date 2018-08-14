@@ -2,9 +2,9 @@ import unittest
 
 import numpy as np
 
-from evolute.operators.mate import SmoothMate, RandomPickMate
-from evolute.operators.mutate import UniformLocuswiseMutation
-from evolute.operators.selection import Elitism
+from evolute.operators import SmoothMate, RandomPickMate
+from evolute.operators import UniformLocuswiseMutation
+from evolute.operators import Elitism
 
 
 class TestMate(unittest.TestCase):

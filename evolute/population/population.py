@@ -10,13 +10,15 @@ class Population:
 
     def __init__(self, loci: int,
                  fitness_wrapper,
-                 operators=None,
                  limit=100,
+                 operators=None,
                  initializer=None):
         """
         :param loci: number of elements in an individual's chromosome
-        :param fitness_wrapper: accepts a phenotype, returns fitnesses
+        :param fitness_wrapper: accepts an individual, returns fitnesses
         :param limit: maximum number of individuals
+        :param operators: an instance of Operators
+        :param initializer: instance of a class defined in evolute.initialization
          and index of mutants
         """
         self.loci = loci

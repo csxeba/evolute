@@ -1,7 +1,7 @@
 from .population import Population
 
 
-class MemeticAlgorithm(Population):
+class MemeticPopulation(Population):
 
     def update_individual(self, index, **fitness_kw):
         phenotype = self.get_individual(index)

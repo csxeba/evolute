@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from evaluation.grade import WeightedSumGrade
+from evolute.evaluation import WeightedSumGrade
 
 
 class TestGrade(unittest.TestCase):

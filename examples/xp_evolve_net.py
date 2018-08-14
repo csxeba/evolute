@@ -7,7 +7,7 @@ from brainforge.layers import DenseLayer
 from brainforge.cost import cost_factory
 
 from evolute.operators import ScatterMateWrapper, SmoothMate, Operators
-from evolute import DifferentialEvolution
+from evolute import GeneticPopulation
 
 np.random.seed(1234)
 
@@ -44,10 +44,10 @@ def forge_layerstack():
 def get_population():
     layers = forge_layerstack()
     operators = Operators(mate_op=ScatterMateWrapper(SmoothMate, 3.))
-    pop = DifferentialEvolution.simple_fitness(limit=100, loci=layers.nparams,
-                                               operators=operators,
-                                               fitness_callback=fitness,
-                                               fitness_constants={"layerstack": layers})
+    pop = GeneticPopulation.simple_fitness(limit=100, loci=layers.nparams,
+                                           operators=operators,
+                                           fitness_callback=fitness,
+                                           fitness_constants={"layerstack": layers})
     return layers, pop
 
 
