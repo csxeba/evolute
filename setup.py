@@ -8,5 +8,7 @@ setup(
     license='MIT',
     author='Csaba Gór',
     author_email='csxeba@gmail.com',
-    description='Evolutionary algorithm toolbox'
+    description='Evolutionary algorithm toolbox',
+    long_description=open("Readme.md").read(),
+    long_description_content_type='text/markdown'
 )
