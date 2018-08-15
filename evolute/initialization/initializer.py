@@ -9,12 +9,12 @@ class Initializer:
 
 class NormalRandom(Initializer):
 
-    def __init__(self, mean=0., std=1.):
+    def __init__(self, mean=0., stdev=1.):
         self.mean = mean
-        self.std = std
+        self.stdev = stdev
 
     def initialize(self, *shape):
-        return np.random.randn(*shape) * self.std + self.mean
+        return np.random.randn(*shape) * self.stdev + self.mean
 
 
 class UniformRandom(Initializer):

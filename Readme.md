@@ -105,7 +105,7 @@ This module defines initializers: objects for random population
 initialization strategies. Currently the following distributions
 are available in *evolute.initialization*:
 
-- **NormalRandom**: with customizable **mean** and **std**
+- **NormalRandom**: with customizable **mean** and **stdev**
 - **UniformRandom**: with customizable **low** and **high**
 - **OrthogonalNormal**: produces a diagonal random matrix 
  
@@ -153,7 +153,7 @@ individuals and produces a single individual
 it adds gaussian noise to the new individual. Its constructor expects
 the following parameters:
   - **base**: reference to the base mate operator object
-  - **sigma**: standard deviation of the additive gaussian noise
+  - **stdev**: standard deviation of the additive gaussian noise
   
 If no mate operator is defined, every mate-using class defaults to
 *RandomPickMate*.

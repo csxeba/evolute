@@ -34,11 +34,11 @@ DefaultMate = RandomPickMate
 
 class ScatterMateWrapper(MateBase):
 
-    def __init__(self, base=DefaultMate, sigma=1.):
+    def __init__(self, base=DefaultMate, stdev=1.):
         if isinstance(base, type):
             base = base()
         self.base = base
-        self.sigma = sigma
+        self.stdev = stdev
 
     def apply(self, ind1, ind2):
-        return self.base(ind1, ind2) + np.random.randn(*ind1.shape) * self.sigma
+        return self.base(ind1, ind2) + np.random.randn(*ind1.shape) * self.stdev

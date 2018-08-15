@@ -35,7 +35,7 @@ population = GeneticPopulation(
     loci=w_flat.size,
     fitness_wrapper=fitness,
     initializer=NormalRandom(mean=w_flat),
-    operators=Operators(mate_op=ScatterMateWrapper(SmoothMate(), sigma=3.))
+    operators=Operators(mate_op=ScatterMateWrapper(SmoothMate(), stdev=3.))
 )
 
 BATCH_SIZE = 128
