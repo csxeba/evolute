@@ -1,6 +1,6 @@
 import numpy as np
 
-from .grade import SumGrade
+from .grade import SumGrader
 
 
 class FitnessBase:
@@ -33,7 +33,7 @@ class MultipleFitnesses(FitnessBase):
         self.functions = functions_by_name
         self.order = order_by_name or list(self.functions)
         self.constants = constants_by_function_name or {k: {} for k in self.order}
-        self.grader = grader or SumGrade()
+        self.grader = grader or SumGrader()
         if len(self.order) != len(self.functions) or any(o not in self.functions for o in self.order):
             raise ValueError("The specified order is wrong: {}".format(self.order))
         if len(self.constants) != len(self.functions) or any(k not in self.functions for k in self.constants):
@@ -52,7 +52,7 @@ class MultiReturnFitness(FitnessBase):
         super().__init__(no_fitnesses=number_of_return_values)
         self.function = fitness_function
         self.constants = {} if constants is None else constants
-        self.grader = SumGrade() if grader is None else grader
+        self.grader = SumGrader() if grader is None else grader
 
     def __call__(self, phenotype, **variables):
         fitness = np.array(self.function(phenotype, **self.constants, **variables))

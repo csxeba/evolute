@@ -1,27 +1,21 @@
 import numpy as np
 
 
-class GradeBase:
+class GraderBase:
 
     def __call__(self, fitness):
         raise NotImplementedError
 
 
-class NoopGrade(GradeBase):
-
-    def __call__(self, fitness):
-        return fitness
-
-
-class SumGrade(GradeBase):
+class SumGrader(GraderBase):
 
     def __call__(self, fitness):
         return np.sum(fitness)
 
 
-class WeightedSumGrade(GradeBase):
+class WeightedSumGrader(GraderBase):
 
-    def __init__(self, weights=None):
+    def __init__(self, weights):
         self.weights = np.ones(1) if weights is None else weights
 
     def __call__(self, fitness):

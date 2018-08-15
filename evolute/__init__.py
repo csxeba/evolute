@@ -1,1 +1,1 @@
-from .population import Population, GeneticPopulation, MemeticPopulation
+from .population import GeneticPopulation

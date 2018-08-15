@@ -1,16 +1,13 @@
 import numpy as np
 
-from .mate import DefaultMate
-
 
 class SelectionBase:
 
     def __init__(self, selection_rate=0.5, mate_op=None, exclude_self_mating=True):
-        self.mate_op = None
+        self.mate_op = mate_op
         self.rate = None
         self._selection_mask = None
         self.exclude_self_mating = exclude_self_mating
-        self.set_mate_operator(DefaultMate() if mate_op is None else mate_op)
         self.set_selection_rate(selection_rate)
 
     @property
