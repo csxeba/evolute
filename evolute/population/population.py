@@ -126,3 +126,15 @@ class Population:
 
     def _invalidated_individual_indices(self, force_update):
         return np.arange(self.limit) if force_update else self.operators.invalid_individual_indices()
+
+    def save(self, path):
+        import pickle
+        import gzip
+        with gzip.open(path, "wb") as handle:
+            pickle.dump(self, handle)
+
+    @staticmethod
+    def load(path):
+        import pickle
+        import gzip
+        return pickle.load(gzip.open(path, "rb"))

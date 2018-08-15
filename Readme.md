@@ -46,6 +46,38 @@ order. Its constructor accepts the following arguments:
 Will add support for MemeticPopulation, which allows for explicit modification
 of the individuals during fitness calculation
 
+An evolutionary optimization can be run using the population.run() method, which
+accepts the following arguments:
+- **epochs**: how many iterations should be done
+- **survival_rate**: reset survival rate
+- **mutation_rate**: reset mutation rate
+- **force_update_at_every**: at every *k*th iteration, force a complete
+fitness-recalculation
+- **verbosity**: 0 is silent, > 0 is verbose.
+- **history**: evolute.utils.history.History object, in which runtime metrics
+can be recorded. If omitted, one is instantiated implicitly.
+
+The run() method returns a history object with generation, best_grade, mean_grade
+and grade_stdev recorded by default. 
+
+A population can be saved and loaded with the save() and load() methods, which
+produces a gzip-compressed pickle of the Population object.
+
+Single epoch can be also run with the epoch() method and an update can be forced
+with the update() method.
+
+For convenience, these methods are defined:
+- **epoch()**: use this to evaluate a single epoch
+- **update()**: forces a fitness update
+- **simple_fitness()**: class factory method, which takes a nude fitness function
+and wraps it implicitly with SimpleFitness (see below).
+- **get_individual(index)**
+- **set_indivudual(index, individual)**
+- **get_best()**: the current best individual with the lowest fitness/grade
+- **get_champion**: the all-time best individual is alway stored implicitly,
+and can be accessed here.
+ 
+
 ### Module: *evaluation*
 
 Defines different wrappers for fitness functions.
