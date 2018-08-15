@@ -1,5 +1,5 @@
 # Evolute
-An evolutionary algorithm toolbox
+Evolutionary algorithm toolbox
 
 ## Documentation
 
@@ -32,13 +32,19 @@ calculation.
 
 ### Module: *population*
 
-Different population types are defined here.
-Every population type can accept the following constructor arguments:
-- **loci**: number of elements in an individual's chromosome
-- **fitness_wrapper**: instance of a class in evolute.evaluation
-- **limit**: maximum number of individuals, defaults to 100
-- **operators**: an instance of *evolute.operators.Operators*, see operators later
-- **initializer**: instance of a class defined in evolute.initialization, optional
+Defines containers for individuals and aggregates the operators
+applied to them. Currently the following population types are defined:
+- **GeneticPopulation**: can be used for genetic algorithms, simply
+evaluates the fitnesses and applies the operators in the above specified
+order. Its constructor accepts the following arguments:
+  - **loci**: number of elements in an individual's chromosome
+  - **fitness_wrapper**: instance of a class in evolute.evaluation
+  - **limit**: maximum number of individuals, defaults to 100
+  - **operators**: an instance of *evolute.operators.Operators*, see operators later
+  - **initializer**: instance of a class defined in evolute.initialization, optional
+
+Will add support for MemeticPopulation, which allows for explicit modification
+of the individuals during fitness calculation
 
 ### Module: *evaluation*
 
@@ -180,15 +186,3 @@ constructor takes the following arguments:
  
 If no mutate operator is defined, every mutate-using class defaults
 to *UniformLocuswiseMutation*.
-
-### Module: population
-
-Defines containers for individuals and aggregates the operators
-applied to them. Currently the following population types are defined:
-
-- **GeneticPopulation**: can be used for genetic algorithms, simply
-evaluates the fitnesses and applies the operators in the above specified
-order.
-
-Will add support for MemeticPopulation, which allows for explicit modification
-of the individuals during fitness calculation
