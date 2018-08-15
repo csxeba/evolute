@@ -222,5 +222,5 @@ to *UniformLocuswiseMutation*.
 ### Module: utility
 
 Some useful stuff here. Maybe the most interesting is the
-evolute.keras_utility module, which defines some helpers to interface
+*evolute.keras_utility* module, which defines some helpers to interface
 with Keras and do some Neuroevolution on the weights of a network.
