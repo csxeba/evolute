@@ -105,7 +105,7 @@ Some graders are available in *evolute.evaluation*:
 - **WeightedSumGrader**: accepts a set of weights in its constructor
 and produces a weighted sum (dot product) with the fitness values.
 
-### Module: initialization
+### Module: *initialization*
 
 This module defines initializers: objects for random population
 initialization strategies. Currently the following distributions
@@ -115,7 +115,7 @@ are available in *evolute.initialization*:
 - **UniformRandom**: with customizable **low** and **high**
 - **OrthogonalNormal**: produces a diagonal random matrix 
  
-### Module: operators
+### Module: *operators*
  
 Evolutionary operators are defined here. This module defines an
 **Operators** class, which aggregates all the operators needed to
