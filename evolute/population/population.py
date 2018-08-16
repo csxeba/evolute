@@ -55,6 +55,10 @@ class Population:
     def get_champion(self):
         return self.get_individual(self.champion)
 
+    def get_fitness_weighted_average_individual(self):
+        weights = (self.fitnesses - self.fitnesses.mean()) / self.fitnesses.std()
+        return weights @ self.individuals
+
     def run(self, epochs: int,
             survival_rate: float=0.5,
             mutation_rate: float=0.1,
@@ -116,7 +120,7 @@ class Population:
             self.update_individual(ind, **fitness_kw)
         if verbose:
             print("\rUpdating {}/{}".format(self.limit, self.limit), end="")
-            print(" Mean grade:", self.fitnesses.mean())
+            print(" Best grade:", self.fitnesses.min())
         chump = self.fitnesses.argmin()
         if self.fitnesses[chump] < self.fitnesses[self.champion]:
             self.champion = chump

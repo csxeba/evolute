@@ -33,7 +33,8 @@ class UniformLocuswiseMutation(MutationBase):
     def apply(self, individuals, inplace=False):
         indshape = individuals.shape
         if self.rate == 0.:
-            mask = np.zeros(indshape, dtype=bool)
+            self.mask = np.zeros(len(individuals), dtype=bool)
+            return individuals
         elif self.rate == 1.:
             mask = np.ones(indshape, dtype=bool)
         else:

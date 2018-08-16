@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 from brainforge import LayerStack
 from brainforge.layers import DenseLayer
-from brainforge.cost import cost_factory
+from brainforge.cost import costs
 
 from evolute.operators import ScatterMateWrapper, SmoothMate, Operators
 from evolute import GeneticPopulation
@@ -25,7 +25,7 @@ vX, vY = rX[varg], rY[varg]
 
 tX += np.random.randn(*tX.shape) / np.sqrt(tX.size*0.25)
 
-loss_fn = cost_factory("mse")
+loss_fn = costs["mse"]
 
 
 def fitness(phenotype, layerstack, X, Y):

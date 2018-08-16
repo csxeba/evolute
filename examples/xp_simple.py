@@ -1,16 +1,26 @@
 import numpy as np
 
-from evolute import GeneticPopulation, operators
-from evolute.fitness import SimpleFunction
-from evolute.utility import describe
+from matplotlib import pyplot as plt
+
+from evolute import GeneticPopulation
+from evolute.evaluation import SimpleFitness
 
 TARGET = np.ones(10) * 0.5
 
 pop = GeneticPopulation(loci=10,
-                        fitness_wrapper=SimpleFunction(lambda ind: np.linalg.norm(ind - TARGET)),
-                        mate_op=operators.SmoothMate())
+                        fitness_wrapper=SimpleFitness(lambda ind: np.linalg.norm(ind - TARGET)))
 
-pop.update()
-describe(pop, show=3)
-pop.run(100, verbosity=0)
-describe(pop, show=3)
+history = pop.run(100)
+history = {k: np.array(v) for k, v in history.history.items()}
+
+x = history["generation"]
+
+plt.plot(x, history["mean_grade"], "r-", label="mean")
+plt.plot(x, history["mean_grade"] + history["grade_std"], "b--", label="std")
+plt.plot(x, history["mean_grade"] - history["grade_std"], "b--")
+plt.plot(x, history["best_grade"], "g-", label="mean")
+
+plt.title("Population convergence")
+plt.legend()
+plt.grid()
+plt.show()

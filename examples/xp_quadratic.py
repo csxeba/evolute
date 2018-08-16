@@ -45,12 +45,14 @@ def main():
     plt.close()
     plt.ioff()
     Xs = np.arange(1, len(means) + 1)
-    plt.plot(Xs, means, "b-")
-    plt.plot(Xs, means+stds, "g--")
+    plt.plot(Xs, means, "b-", label="mean")
+    plt.plot(Xs, means+stds, "g--", label="stdev")
     plt.plot(Xs, means-stds, "g--")
-    plt.plot(Xs, bests, "r-")
+    plt.plot(Xs, bests, "r-", label="best")
     plt.xlim([Xs.min()-1, Xs.max()+1])
     plt.ylim([bests.min()-1, (means+stds).max()+1])
+    plt.legend()
+    plt.grid()
     plt.show()
 
 
