@@ -17,7 +17,7 @@ class SimpleFitness(FitnessBase):
     def __init__(self, fitness_function, constants: dict=None, **kw):
         super().__init__(no_fitnesses=1)
         self.function = fitness_function
-        self.constants = {} if constants is None else constants
+        self.constants = constants or {}  # type: dict
         self.constants.update(kw)
 
     def __call__(self, phenotype, **variables):
@@ -51,8 +51,8 @@ class MultiReturnFitness(FitnessBase):
     def __init__(self, fitness_function, number_of_return_values, constants: dict=None, grader=None):
         super().__init__(no_fitnesses=number_of_return_values)
         self.function = fitness_function
-        self.constants = {} if constants is None else constants
-        self.grader = SumGrader() if grader is None else grader
+        self.constants = constants or {}  # type: dict
+        self.grader = grader or SumGrader()
 
     def __call__(self, phenotype, **variables):
         fitness = np.array(self.function(phenotype, **self.constants, **variables))

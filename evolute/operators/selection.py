@@ -53,7 +53,7 @@ class SelectionBase:
         return self.apply(individuals, fitnesses, inplace)
 
 
-class Elitism(SelectionBase):
+class ElitismSelection(SelectionBase):
 
     def apply(self, individuals, fitnesses, inplace=False):
         self._selection_step(individuals, fitnesses)
@@ -85,4 +85,4 @@ class Elitism(SelectionBase):
         return offspring
 
 
-DefaultSelection = Elitism
+DefaultSelection = ElitismSelection

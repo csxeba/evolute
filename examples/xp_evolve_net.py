@@ -44,7 +44,7 @@ def forge_layerstack():
 def get_population():
     layers = forge_layerstack()
     operators = Operators(mate_op=ScatterMateWrapper(SmoothMate, 3.))
-    pop = GeneticPopulation.simple_fitness(limit=100, loci=layers.nparams,
+    pop = GeneticPopulation.simple_fitness(limit=100, loci=layers.num_params,
                                            operators=operators,
                                            fitness_callback=fitness,
                                            fitness_constants={"layerstack": layers})

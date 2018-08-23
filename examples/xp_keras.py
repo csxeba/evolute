@@ -8,7 +8,7 @@ from keras.utils import to_categorical
 from evolute import GeneticPopulation
 from evolute.evaluation import SimpleFitness
 from evolute.initialization import NormalRandom
-from evolute.operators import RandomPickMate, Operators, UniformLocuswiseMutation, ScatterMateWrapper
+from evolute.operators import RandomPickMate, Operators, UniformMutation, ScatterMateWrapper
 from evolute.utility.keras_utility import WeightFolding
 
 
@@ -48,7 +48,7 @@ population = GeneticPopulation(
     fitness_wrapper=fitness,
     initializer=NormalRandom(mean=w_flat),
     operators=Operators(mate_op=ScatterMateWrapper(RandomPickMate(), stdev=2.),
-                        mutate_op=UniformLocuswiseMutation(low=-3., high=3.))
+                        mutate_op=UniformMutation(low=-3., high=3.))
 )
 
 BATCH_SIZE = 128
